@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const ObjectId = Schema.ObjectId;
 //Update d'un perso
 const Movie = new Schema({
-    TITRE: { type: String },
-    ANNEE: { type: Number },
+    TITRE: { type: String, required: true },
+    TITRE_CAMELCASE: { type: String, required: true },
+    ANNEE: {
+        type: Number,
+        required: true,
+        min: 1900,
+        max: new Date().getFullYear(),
+    },
     CATEGORIE: { type: String },
     GENRE: { type: String },
     REALISATEUR: { type: String },

@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const _ = require("lodash");
 /* fs.createReadStream("films.csv")
     .pipe(csv())
     .on("data", (row) => {
@@ -41,6 +41,9 @@ for (let i = 0; i < row.length - 1; i++) {
                 film[nameAttribute[j]] = tab;
             } else if (nameAttribute[j] === "ANNEE" || nameAttribute[j] === "ZONE") {
                 film[nameAttribute[j]] = parseInt(inter[j]);
+            } else if (nameAttribute[j] === "TITRE") {
+                film[nameAttribute[j]] = inter[j];
+                film["TITRE_CAMELCASE"] = _.camelCase(inter[j]);
             } else {
                 film[nameAttribute[j]] = inter[j];
             }
@@ -49,4 +52,4 @@ for (let i = 0; i < row.length - 1; i++) {
     }
 }
 
-fs.writeFileSync("./file/film.json", JSON.stringify(futureJSONFile));
+fs.writeFileSync("./file/newFilms.json", JSON.stringify(futureJSONFile));
