@@ -1,12 +1,12 @@
 const Mongoose = require("mongoose");
 const ObjectId = Mongoose.Types.ObjectId;
-
+const { ValidationError, InternError } = require("./error");
 async function checkSchema(req, schema) {
     if (!schema) {
         return true;
     }
     if (req.method.toLowerCase() === "post" && Object.keys(req.body).length === 0) {
-        throw new Error("Empty POST body");
+        throw new ValidationError("You send an empty post request");
     }
     let numTotal = 0;
     let numRequired = 0;
@@ -20,7 +20,7 @@ async function checkSchema(req, schema) {
     });
     Object.keys(req.body).forEach((key) => {
         if (!schema[key]) {
-            throw new Error("attribute doesnt exist");
+            throw new InternError(`Invalid field in schema (field :${key})`);
         } else {
             numTotal--;
             if (!schema[key].optional) {
@@ -29,7 +29,7 @@ async function checkSchema(req, schema) {
         }
     });
     if (numRequired !== 0) {
-        throw new Error("You dont have fill enough field to create a new movie");
+        throw new ValidationError("You dont have fill enough field to create a new movie");
     }
 }
 

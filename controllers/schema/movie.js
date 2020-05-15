@@ -26,6 +26,7 @@ module.exports = {
         },
         NUMERO: {
             in: "body",
+            optional: true,
         },
         TYPE: {
             in: "body",
