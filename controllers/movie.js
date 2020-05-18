@@ -10,7 +10,7 @@ const MovieController = {
     async getMovieList(req, res) {
         try {
             const list = await Movie.find();
-            console.log(list);
+
             res.status(200).json(list);
         } catch (error) {
             res.error(error);
@@ -45,6 +45,7 @@ const MovieController = {
             }).save();
             //vérification du body
             //ajout  du film dans la liste
+            Log.info(`Movie ${newMovie._id} created`);
             return res.status(200).json(newMovie);
         } catch (error) {
             res.error(error);
@@ -66,6 +67,7 @@ const MovieController = {
                 }
             );
             if (updatedMovie) {
+                Log.info(`Movie ${updatedMovie._id} edited`);
                 return res.status(200).json(updatedMovie.toJSON());
             } else {
                 throw new NotFoundError("Movie not Found");
@@ -81,6 +83,7 @@ const MovieController = {
             const movie = await MovieController.getMovieId(req, res);
             if (movie) {
                 const deleted = await movie.remove();
+                Log.info(`Movie ${movie._id} deleted`);
                 return res.status(200).json(deleted.toJSON());
             } else {
                 throw new NotFoundError("Movie not Found");

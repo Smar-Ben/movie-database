@@ -5,7 +5,7 @@ const middleware = (req, res, next) => {
         const httpCode = err.httpCode || 500;
         //on met des log si il y a une erreur interne du serveur
         if (httpCode === 500) {
-            //Log.error(err.stack || err.message || err);
+            Log.error(err.stack || err.message || err);
         }
         //on envoie l'erreur en format JSON
         const response = {
