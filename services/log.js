@@ -8,16 +8,7 @@ const logger = createLogger({
         }),
         format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
     ),
-    transports: [
-        new transports.Console({
-            level: "info",
-            format: format.combine(
-                format.colorize(),
-                format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
-            ),
-        }),
-        new transports.File({ filename: "./logs/app.log" }),
-    ],
+    transports: [new transports.File({ filename: "./logs/app.log" })],
 });
 
 module.exports = logger;

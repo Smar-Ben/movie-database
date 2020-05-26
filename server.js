@@ -6,7 +6,12 @@ const Movie = require("./models/Movie");
 const { middleware } = require("./services/error");
 const Log = require("./services/log");
 //connection à la base de données
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+});
 const db = mongoose.connection;
 db.once("open", (_) => {
     Log.info(`Database connected: ${url}`);
@@ -15,10 +20,9 @@ db.on("error", (err) => {
     Log.error(`connection error: ${err}`);
 });
 //installation des middlewares de base
+const app = express();
 
 try {
-    const app = express();
-
     const urlencodedParser = bodyParser.urlencoded({
         extended: true,
     });
@@ -40,3 +44,5 @@ try {
     Log.error("Error while starting app");
     Log.error(err);
 }
+
+module.exports = app;

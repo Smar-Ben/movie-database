@@ -5,6 +5,7 @@ const Mongoose = require("mongoose");
 const _ = require("lodash");
 const { NotFoundError, InternError } = require("../services/error");
 const ObjectId = Mongoose.Types.ObjectId;
+const Log = require("../services/log");
 
 const MovieController = {
     async getMovieList(req, res) {
@@ -37,7 +38,6 @@ const MovieController = {
     },
     async addMovie(req, res) {
         try {
-            console.log(req.body);
             await Validator.checkSchema(req, Schema.create);
             const newMovie = await new Movie({
                 ...req.body,

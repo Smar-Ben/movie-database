@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "init": "node init.js",
         "create": "node create.js",
-        "start": "nodemon server.js"
+        "start": "nodemon server.js",
+        "test": "mocha --exit"
     },
     "author": "",
     "license": "ISC",
@@ -14,12 +14,16 @@
     "dependencies": {
         "app-root-path": "^3.0.0",
         "body-parser": "^1.19.0",
+        "chai": "^4.2.0",
+        "chai-http": "^4.3.0",
         "csv-parser": "^2.3.2",
         "csvtojson": "^2.0.10",
         "express": "^4.17.1",
         "lodash": "^4.17.15",
+        "mocha": "^7.1.2",
         "mongoose": "^5.9.12",
         "nodemon": "^2.0.3",
+        "sinon": "^9.0.2",
         "winston": "^3.2.1"
     }
 }

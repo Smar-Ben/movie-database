@@ -1,3 +1,5 @@
+const Log = require("./log");
+
 // injecte fonction utilitire dans app express pour renvoyer des errreurs
 const middleware = (req, res, next) => {
     res.error = (err) => {
